@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../common/cart-item.model';
+import { OrderItems } from '../common/order-items';
 
 @Injectable({
   providedIn: 'root'
@@ -66,8 +67,24 @@ export class CartService {
   private updateCartTotals() {
     const totalQuantity = this.getTotalQuantity();
     const totalPrice = this.getTotalPrice();
+    console.log('Total Quantity:', totalQuantity);
+    console.log('Total Price:', totalPrice);
 
     this.totalQuantitySubject.next(totalQuantity);
+    console.log("cartservice total quantity"+totalQuantity);
     this.totalPriceSubject.next(totalPrice);
+  }
+
+  getOrderItems(): OrderItems[] {
+    return this.cartItems.map(cartItem => {
+      return new OrderItems(cartItem.imageUrl, cartItem.price,cartItem.name, cartItem.quantity, cartItem.id);
+    });
+  }
+
+  clearCart() {
+    this.cartItems = [];
+    this.totalPriceSubject.next(0);
+    this.totalQuantitySubject.next(0);
+    console.log('Cart has been cleared.');
   }
 }

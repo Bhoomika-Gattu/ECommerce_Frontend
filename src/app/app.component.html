@@ -1,6 +1,23 @@
-<div class="page-wrapper">
+<!-- <div class="page-wrapper">
+    <aside class="menu-sidebar d-none d-lg-block" *ngIf="isAdmin()">
+        <div class="logo">
+            <a href="#">
+                <img src="assets/images/arjun-logo.jpg" alt="Arjun" class="img-responsive">
+            </a>
+        </div>
+        <div class="menu-sidebar-content js-scrollbar1">
+            <nav class="navbar-sidebar">
+                <ul class="list-unstyled navbar-list">
+                    <li><a href="/admin-dashboard">Admin Dashboard</a></li>
+                    <li><a href="/manage-users">Manage Users</a></li>
+                    <li><a href="/manage-orders">Manage Orders</a></li>
+                    <!-- Add other admin-specific items here -->
+                <!-- </ul>
+            </nav>
+        </div>
+    </aside> -->
     <!-- MENU SIDEBAR-->
-    <aside class="menu-sidebar d-none d-lg-block">
+    <!-- <aside class="menu-sidebar d-none d-lg-block" *ngIf="!isAdmin()">
         <div class="logo">
             <a href="#">
                 <img src="assets/images/arjun-logo.jpg" alt="Arjun" class="img-responsive">
@@ -17,16 +34,16 @@
             </nav>
             
         </div>
-    </aside>
+    </aside> -->
     <!-- END MENU SIDEBAR-->
-    <div class="page-container">
+    <!-- <div class="page-container"> -->
         <!-- HEADER DESKTOP-->
-        <header class="header-desktop">
+        <!-- <header class="header-desktop">
             <div class="section-content section-content-p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-                        <form class="form-header" (ngSubmit)="onSubmit()" #searchForm="ngForm">
-                            <input class="au-input au-input-xl" type="text" name="search"
+                        <form class="form-header" (ngSubmit)="onSubmit()" #searchForm="ngForm"> -->
+                            <!-- <input class="au-input au-input-xl" type="text" name="search"
                              
                                 [(ngModel)]="currentProductName"
                                 placeholder="Search for data ..." />
@@ -35,8 +52,16 @@
                             <button class="au-btn-submit" type="submit">
                                 Search
                             </button>
+                           
+                           
                         </form>
-                          <div class="cart-area">
+
+                        <button class="au-btn-submit" type="button" *ngIf="!isLoginPage()" [routerLink]="['/login']">
+                            Login
+                        </button> -->
+                       
+                        
+                          <!-- <div class="cart-area">
                             <a routerLink="/cart">
                               <div class="total">
                                 {{ cartTotal | currency }} <span>{{ cartQuantity }}</span>
@@ -50,15 +75,98 @@
                 </div>
             </div>
             
-        </header>
+        </header> -->
         <!-- END HEADER DESKTOP-->
         <!-- MAIN CONTENT-->
        
+        <!-- <app-product-list *ngIf="currentProductName" [currentProductName]="currentProductName"></app-product-list>
+        <router-outlet></router-outlet>
+    </div> -->
+   
+  
+    <!-- <footer>
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+    </footer> -->
+<!-- </div> -->
+
+<div class="page-wrapper">
+  <!-- USER OR NULL SIDEBAR -->
+  <aside class="menu-sidebar d-none d-lg-block" *ngIf="userRole === 'user' || userRole === null">
+    <div class="logo">
+        <a href="#">
+            <img src="assets/images/arjun-logo.jpg" alt="Arjun" class="img-responsive">
+        </a>
+    </div>
+    <div class="menu-sidebar-content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar-list">
+                <app-category-list></app-category-list>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<!-- ADMIN SIDEBAR -->
+<aside class="menu-sidebar d-none d-lg-block" *ngIf="userRole === 'admin'">
+    <div class="logo">
+        <a href="#">
+            <img src="assets/images/admin-logo.jpg" alt="Admin Logo" class="img-responsive">
+        </a>
+    </div>
+    <div class="menu-sidebar-content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li><a routerLink="/admin/dashboard">Dashboard</a></li>
+                <li><a routerLink="/admin/orders">Orders</a></li>
+                <li><a routerLink="/admin/products">Manage Products</a></li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+   
+      
+
+    <!-- MAIN CONTENT -->
+    <div class="page-container">
+        <!-- HEADER -->
+        <header class="header-desktop">
+            <div class="section-content section-content-p30">
+                <div class="container-fluid">
+                    <div class="header-wrap">
+                        <form class="form-header" (ngSubmit)="onSubmit()" #searchForm="ngForm">
+                            <input class="au-input au-input-xl" type="text" name="search"
+                                   [(ngModel)]="currentProductName"
+                                   placeholder="Search for data ..." />
+                            <button class="au-btn-submit" type="submit">Search</button>
+                        </form>
+                        
+                        <!-- Login Button -->
+                        <button class="au-btn-submit" type="button" *ngIf="!isLoginPage()" [routerLink]="['/login']">Login</button>
+
+                        <!-- Cart -->
+                        <div class="cart-area">
+                            <a routerLink="/cart">
+                                <div class="total">{{ cartTotal | currency }} <span>{{ cartQuantity }}</span></div>
+                                <i class="fa fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                        <!-- <button class="btn btn-danger" (click)="onLogout()">Logout</button> -->
+                    </div>
+                </div>
+               
+            </div>
+            
+        </header>
+
         <app-product-list *ngIf="currentProductName" [currentProductName]="currentProductName"></app-product-list>
         <router-outlet></router-outlet>
     </div>
-   
-  
+
     <footer>
         <ul>
             <li><a href="#">About Us</a></li>
@@ -66,6 +174,8 @@
             <li><a href="#">Help</a></li>
         </ul>
     </footer>
+</div>
+
   
   
   

@@ -55,7 +55,7 @@
         ><br />
         <strong>Total Price: {{ totalPrice | currency }}</strong
         ><br />
-        <button class="btn btn-success">Proceed to Checkout</button>
+        <button (click)="proceedToCheckout()" class="btn btn-success">Proceed to Checkout</button>
       </td>
     </tr>
   </tbody>
