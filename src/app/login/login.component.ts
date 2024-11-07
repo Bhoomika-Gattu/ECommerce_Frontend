@@ -37,7 +37,7 @@ export class LoginComponent {
         
         localStorage.setItem('userRole', 'admin');
         // Navigate to the admin dashboard
-        this.router.navigate(['/admin-dashboard']);
+       // this.router.navigate(['/admin-dashboard']);
       } else {
   
       this.authService.login(email, password).subscribe(
